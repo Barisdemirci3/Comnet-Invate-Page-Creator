@@ -13,7 +13,7 @@
         <div class="row">
             <h1 class="text-center" style="padding-bottom: 50px;">Comnet Davet Kodu Page Generator</h1>
             <h3  class="text-center" style="padding-bottom: 50px;">Alttaki alana davet kodunuzu girin</h3>
-            <form action="page.php" method="get">
+            <form method="get">
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="addon-wrapping">Invite Code</span>
                 <input type="text" name="invite_code" class="form-control" placeholder="Davet Kodu" aria-label="Davet Kodu" aria-describedby="addon-wrapping">
@@ -26,4 +26,15 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
+<script>
+    addEventListener('submit', function(e){
+        e.preventDefault();
+        var invitecode = document.querySelector('input[name="invite_code"]').value;
+        if(invitecode == ""){
+            alert("Davet kodu boş olamaz");
+        }else{
+            window.location.href = "page.php?invite_code="+invitecode;
+        }
+    });
+</script>
 </html>
