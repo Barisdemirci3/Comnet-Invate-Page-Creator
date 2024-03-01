@@ -1,4 +1,19 @@
 <?php
+$product_price = "";
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_URL, "https://www.comnet.com.tr/");
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+$html = curl_exec($curl);
+curl_close($curl);
+$dom = new DOMDocument();
+@$dom->loadHTML($html);
+$xpath = new DOMXPath($dom);
+$elements = $xpath->query("//section[@class='section-margin']/div[@class='2xl:container max-sm:pr-0']/div[@class='wrapper-rounded lgmid:wrapper-shadow lgmid:border lgmid:bg-gradient-standard-opaque  lgmid:py-12 max-2xl:lgmid:mx-4']/div[@class='overflow-x-auto xl:mx-3']");
+if($elements->length == 0){
+    echo "Element bulunamadı";
+    exit;
+}else{
+     $product_price = substr($elements->item(0)->nodeValue,260,-825);
 if (isset($_GET["invite_code"])) {
     $invitecode = $_GET["invite_code"];
     if ($invitecode == "") {
@@ -6,6 +21,7 @@ if (isset($_GET["invite_code"])) {
     }
 } else {
     header("Location: index.php?status=nodata");
+}
 }
 ?>
 <!DOCTYPE html>
@@ -70,7 +86,7 @@ if (isset($_GET["invite_code"])) {
                             <div><span>ve daha fazlası</span></div>
                         </li>
                     </ul>
-                    <p class="sub-title">100 Mbit Kotasız, Taahhütsüz İnternet <span>199 TL <small>'den başlayan fiyatlarla</small></span></p>
+                    <p class="sub-title">100 Mbit Kotasız, Taahhütsüz İnternet <span><?= $product_price ?><small>'den başlayan fiyatlarla</small></span></p>
                 </div>
                 <div class="col-md-6 d-flex align-items-center justify-content-center flex-column">
                     <div class="coupon-banner">
@@ -119,7 +135,6 @@ if (isset($_GET["invite_code"])) {
     <script>
 
     </script>
-
 
 
 
