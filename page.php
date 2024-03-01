@@ -5,6 +5,10 @@ if(isset($_GET["invite_code"])){
         header("Location: index.php?status=empty");
     }
 }
+else{
+    header("Location: index.php?status=nodata");
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="tr">
